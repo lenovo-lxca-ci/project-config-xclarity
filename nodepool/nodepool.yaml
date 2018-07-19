@@ -47,8 +47,8 @@ diskimages:
 providers:
   - name: local_01
 #TODO: Update the provider username, password, and authurl
-    username: '<%= admin %>'
-    password: '<%= 7b7a96dd01454439 %>'
+    username: 'admin'
+    password: '7b7a96dd01454439'
     auth-url: 'http://10.240.24.183:5000/v2.0'
     project-name: 'admin'
     max-servers: 2
