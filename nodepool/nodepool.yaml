@@ -15,7 +15,7 @@ cron:
 #   root@jenkins:~# echo "0 $((RANDOM%23+1)) * * *"
 #   0 16 * * *
 # This references the hour of the day when images will be built.
-  image-update: '0 0 * * *'
+  image-update: '0 19 * * *'
 
 zmq-publishers:
   - tcp://localhost:8888
@@ -47,9 +47,9 @@ diskimages:
 providers:
   - name: local_01
 #TODO: Update the provider username, password, and authurl
-    username: '<%= provider_username %>'
-    password: '<%= provider_password %>'
-    auth-url: 'http://<openstack cloud>:5000/v2.0'
+    username: '<%= admin %>'
+    password: '<%= 7b7a96dd01454439 %>'
+    auth-url: 'http://10.240.24.183:5000/v2.0'
     project-name: 'admin'
     max-servers: 2
     images:
