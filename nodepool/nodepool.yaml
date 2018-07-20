@@ -57,7 +57,7 @@ providers:
     images:
       - name: ubuntu-trusty
         min-ram: 8192
-        diskimage: dpc
+        diskimage: ubuntu-trusty
         username: jenkins
         private-key: '/home/nodepool/.ssh/id_rsa'
 
