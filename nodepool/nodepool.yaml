@@ -1,6 +1,7 @@
 script-dir: /etc/nodepool/scripts
 elements-dir: /etc/nodepool/elements
 images-dir: /opt/nodepool_dib
+build-log-dir: /var/log/nodepool/builds
 
 #cron:
 #  cleanup: '*/1 * * * *'
@@ -24,16 +25,16 @@ gearman-servers:
   - host: 127.0.0.1
 
 labels:
-  - name: d-p-c
-    image: dpc
+  - name: ubuntu-T
+    image: ubuntu-trusty
     min-ready: 1
     providers:
-      - name: local_01
+      - name: cloud_183
 
 diskimages:
-    - name: dpc
+    - name: ubuntu-trusty
       elements:
-        - ubuntu
+        - ubuntu-minimal
         - vm
         - openstack-repos
         - nodepool-base
@@ -44,7 +45,7 @@ diskimages:
         DIB_IMAGE_CACHE: /opt/dib_cache
 
 providers:
-  - name: local_01
+  - name: cloud_183
 #TODO: Update the provider username, password, and authurl
     username: 'admin'
     password: '7b7a96dd01454439'
@@ -52,7 +53,7 @@ providers:
     project-name: 'admin'
     max-servers: 2
     images:
-      - name: dpc
+      - name: ubuntu-trusty
         min-ram: 8192
         diskimage: dpc
         username: jenkins
