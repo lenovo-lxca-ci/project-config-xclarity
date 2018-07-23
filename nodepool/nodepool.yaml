@@ -53,6 +53,7 @@ providers:
     project-name: 'admin'
     user-domain-name: 'Default'
     project-domain-name: 'Default'
+    identity_api_version: 3
     max-servers: 2
     images:
       - name: ubuntu-trusty
