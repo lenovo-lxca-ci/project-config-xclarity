@@ -47,13 +47,15 @@ diskimages:
 providers:
   - name: cloud_183
 #TODO: Update the provider username, password, and authurl
-    username: 'admin'
-    password: '7b7a96dd01454439'
-    auth-url: 'http://10.240.24.183:5000/v3'
-    project-name: 'admin'
-    user-domain-name: 'Default'
-    project-domain-name: 'Default'
-    identity_api_version: 3
+    #username: 'admin'
+    #password: '7b7a96dd01454439'
+    #auth-url: 'http://10.240.24.183:5000/v3'
+    #project-name: 'admin'
+    #user-domain-name: 'Default'
+    #project-domain-name: 'Default'
+    #identity_api_version: 3
+    region-name: 'RegionOne'
+    cloud: cloud_183
     max-servers: 2
     images:
       - name: ubuntu-trusty
