@@ -49,7 +49,7 @@ providers:
 #TODO: Update the provider username, password, and authurl
     username: 'admin'
     password: '7b7a96dd01454439'
-    auth-url: 'http://10.240.24.183:5000/v2.0'
+    auth-url: 'http://10.240.24.183:5000/v3'
     project-name: 'admin'
     user-domain-name: 'Default'
     project-domain-name: 'Default'
