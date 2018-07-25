@@ -24,13 +24,39 @@ gearman-servers:
   - host: 127.0.0.1
 
 labels:
-  - name: ubuntu-T
+  - name: Ubuntu-T
     image: ubuntu-trusty
+    min-ready: 1
+    providers:
+      - name: cloud_183
+  - name: CentOS-7
+    image: centos-7
     min-ready: 1
     providers:
       - name: cloud_183
 
 diskimages:
+    - name: centos-7
+      pause: false
+      elements:
+        - centos-minimal
+        - vm
+        - simple-init
+        - openstack-repos
+        - nodepool-base
+        - cache-devstack
+        - growroot
+        - infra-package-needs
+        - epel
+      env-vars:
+        TMPDIR: /opt/dib_tmp
+        DIB_CHECKSUM: '1'
+        DIB_IMAGE_CACHE: /opt/dib_cache
+        QEMU_IMG_OPTIONS: compat=0.10
+        DIB_GRUB_TIMEOUT: '0'
+        DIB_EPEL_DISABLED: '1'
+        GIT_HTTP_LOW_SPEED_TIME: '300'
+        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
     - name: ubuntu-trusty
       elements:
         - ubuntu-minimal
@@ -64,6 +90,11 @@ providers:
       - name: ubuntu-trusty
         min-ram: 2048
         diskimage: ubuntu-trusty
+        username: jenkins
+        private-key: '/home/nodepool/.ssh/id_rsa'
+      - name: centos-7
+        min-ram: 2048
+        diskimage: centos-7
         username: jenkins
         private-key: '/home/nodepool/.ssh/id_rsa'
 
