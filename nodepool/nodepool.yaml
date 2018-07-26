@@ -111,7 +111,7 @@ diskimages:
 
 providers:
   - name: cloud_183
-    region-name: 'RegionTwo'
+    region-name: 'RegionOne'
     cloud: cloud_183
     max-servers: 2
     boot-timeout: 240
