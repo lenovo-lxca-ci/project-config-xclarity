@@ -85,6 +85,8 @@ providers:
     region-name: 'RegionOne'
     cloud: cloud_183
     max-servers: 2
+    auto-floating-ip: False
+    host-key-checking: False
     images:
 #      - name: ubuntu-trusty
 #        min-ram: 2048
