@@ -86,7 +86,7 @@ providers:
     cloud: cloud_183
     max-servers: 2
     auto-floating-ip: False
-    host-key-checking: False
+#    host-key-checking: False
     boot-timeout: 240
     images:
 #      - name: ubuntu-trusty
@@ -99,6 +99,7 @@ providers:
         diskimage: centos-7
         username: jenkins
         private-key: '/home/nodepool/.ssh/id_rsa'
+        host-key-checking: False
         console-log: True
 
 targets:
