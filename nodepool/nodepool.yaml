@@ -87,6 +87,7 @@ providers:
     max-servers: 2
     auto-floating-ip: False
     host-key-checking: False
+    boot-timeout: 120
     images:
 #      - name: ubuntu-trusty
 #        min-ram: 2048
@@ -98,6 +99,7 @@ providers:
         diskimage: centos-7
         username: jenkins
         private-key: '/home/nodepool/.ssh/id_rsa'
+        console-log: True
 
 targets:
   - name: jenkins1
