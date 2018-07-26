@@ -97,7 +97,6 @@ providers:
         diskimage: centos-7
         username: jenkins
         private-key: '/home/nodepool/.ssh/id_rsa'
-        console-log: True
 
 targets:
   - name: jenkins1
