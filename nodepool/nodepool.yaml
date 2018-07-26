@@ -37,7 +37,6 @@ labels:
 
 diskimages:
     - name: centos-7
-      pause: false
       elements:
         - centos-minimal
         - vm
