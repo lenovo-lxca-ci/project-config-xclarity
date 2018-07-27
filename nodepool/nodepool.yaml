@@ -160,7 +160,8 @@ providers:
         username: jenkins
         private-key: '/home/nodepool/.ssh/id_rsa'
         meta:
-            key: AAAAB3NzaC1yc2EAAAADAQABAAABAQDsLio+SgpDfaI/zXqdCRdNBh3djM/xQVUhXtWs4UG5jThT9Q4zBVccrf1YDH90AbRqHKGAgPEcvi2cW5f1tlejfcFzyu1GXz3Ki6aQScJ1R5i3i/tgqmKLkwT8S4vP3tZHJ88YlVdSY0fDgE/T2QZZhM3LG7ekDHpnbE3U9KF8ORpA6PHo7wp2uMVRGyHoH2NRCJHXXpKmtwdZeUJBzahgI/1JHGMehHJRAA64qM11ZXaDsAj5jFUy1FZ2cTQSBa7ehyvUQoZLj/SVxZBzPHOq2N3Sb55WSX0kiryaIN4/rSna0HBj0bQ/i9WR1A6DIqLSKHp5Ixbuy4NH2QuorJ75
+            key-name: nodepool
+            #key: AAAAB3NzaC1yc2EAAAADAQABAAABAQDsLio+SgpDfaI/zXqdCRdNBh3djM/xQVUhXtWs4UG5jThT9Q4zBVccrf1YDH90AbRqHKGAgPEcvi2cW5f1tlejfcFzyu1GXz3Ki6aQScJ1R5i3i/tgqmKLkwT8S4vP3tZHJ88YlVdSY0fDgE/T2QZZhM3LG7ekDHpnbE3U9KF8ORpA6PHo7wp2uMVRGyHoH2NRCJHXXpKmtwdZeUJBzahgI/1JHGMehHJRAA64qM11ZXaDsAj5jFUy1FZ2cTQSBa7ehyvUQoZLj/SVxZBzPHOq2N3Sb55WSX0kiryaIN4/rSna0HBj0bQ/i9WR1A6DIqLSKHp5Ixbuy4NH2QuorJ75
 #      - name: centos-7
 #        min-ram: 2048
 #        diskimage: centos-7
