@@ -142,6 +142,7 @@ providers:
     region-name: 'RegionOne'
     cloud: cloud_183
     max-servers: 2
+    keypair: 'nodepool'
     boot-timeout: 240
     images:
 #      - name: ubuntu-trusty
