@@ -147,6 +147,7 @@ providers:
     cloud: cloud_183
     max-servers: 2
     boot-timeout: 240
+    launch-timeout: 600
     images:
 #      - name: ubuntu-trusty
 #        min-ram: 2048
