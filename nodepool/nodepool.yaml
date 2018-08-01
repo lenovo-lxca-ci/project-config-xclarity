@@ -1,6 +1,10 @@
-script-dir: /etc/nodepool/scripts
+#script-dir: /etc/nodepool/scripts
 elements-dir: /etc/nodepool/elements
 images-dir: /opt/nodepool_dib
+
+zookeeper-servers:
+  - host: localhost
+    port: 2181
 
 cron:
   cleanup: '*/1 * * * *'
@@ -15,7 +19,7 @@ cron:
 #   root@jenkins:~# echo "0 $((RANDOM%23+1)) * * *"
 #   0 16 * * *
 # This references the hour of the day when images will be built.
-  image-update: '0 01 * * *'
+#  image-update: '0 01 * * *'
 
 zmq-publishers:
   - tcp://localhost:8888
@@ -142,7 +146,6 @@ providers:
     region-name: 'RegionOne'
     cloud: cloud_183
     max-servers: 2
-    keypair: nodepool
     boot-timeout: 240
     images:
 #      - name: ubuntu-trusty
@@ -159,10 +162,10 @@ providers:
         min-ram: 2048
         diskimage: ubuntu-bionic
         username: jenkins
+        key-name: nodepool
         private-key: '/home/nodepool/.ssh/id_rsa'
-        meta:
-            key-name: nodepool
-            #key: AAAAB3NzaC1yc2EAAAADAQABAAABAQDsLio+SgpDfaI/zXqdCRdNBh3djM/xQVUhXtWs4UG5jThT9Q4zBVccrf1YDH90AbRqHKGAgPEcvi2cW5f1tlejfcFzyu1GXz3Ki6aQScJ1R5i3i/tgqmKLkwT8S4vP3tZHJ88YlVdSY0fDgE/T2QZZhM3LG7ekDHpnbE3U9KF8ORpA6PHo7wp2uMVRGyHoH2NRCJHXXpKmtwdZeUJBzahgI/1JHGMehHJRAA64qM11ZXaDsAj5jFUy1FZ2cTQSBa7ehyvUQoZLj/SVxZBzPHOq2N3Sb55WSX0kiryaIN4/rSna0HBj0bQ/i9WR1A6DIqLSKHp5Ixbuy4NH2QuorJ75
+#        meta:
+#            key-name: nodepool
 #      - name: centos-7
 #        min-ram: 2048
 #        diskimage: centos-7
