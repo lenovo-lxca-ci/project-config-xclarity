@@ -148,6 +148,9 @@ providers:
     max-servers: 2
     boot-timeout: 240
     launch-timeout: 600
+    networks:
+      - name: tenant
+    clean-floating-ips: True
     images:
 #      - name: ubuntu-trusty
 #        min-ram: 2048
@@ -170,8 +173,8 @@ providers:
         min-ram: 2048
         diskimage: centos-7
         username: jenkins
-        key-name: cloudBcreate
-        private-key: '/home/nodepool/.ssh/cloudBcreate.pem'
+        key-name: nodepool
+        private-key: '/home/nodepool/.ssh/id_rsa'
 
 targets:
   - name: jenkins1
