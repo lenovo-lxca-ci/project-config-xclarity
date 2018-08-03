@@ -160,7 +160,7 @@ providers:
       - name: ubuntu-xenial
         min-ram: 2048
         diskimage: ubuntu-xenial
-        username: jenkins
+        username: zuul
         key-name: nodepool
         private-key: '/home/nodepool/.ssh/id_rsa'
 #      - name: ubuntu-bionic
