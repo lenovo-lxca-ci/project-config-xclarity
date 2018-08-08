@@ -161,6 +161,7 @@ providers:
         min-ram: 2048
         diskimage: ubuntu-xenial
         username: zuul
+        user-home: /home/zuul
         key-name: nodepool
         private-key: '/home/nodepool/.ssh/id_rsa'
 #      - name: ubuntu-bionic
