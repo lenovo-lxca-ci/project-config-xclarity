@@ -150,10 +150,6 @@ providers:
     #password: '7b7a96dd01454439'
     #cloudB
     password: '64ec9b5a24c7479e'
-    project_name: 'admin'
-    auth_url: 'http://10.240.24.183:5000/v3'
-    user-domain-name: 'Default'
-    project-domain-name: 'Default'
     max-servers: 2
     boot-timeout: 240
     launch-timeout: 600
