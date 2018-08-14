@@ -153,7 +153,7 @@ providers:
     auth-url: 'http://10.240.24.183:5000/v3'
     project-name: 'admin'
     max-servers: 2
-    boot-timeout: 240
+    boot-timeout: 600
     launch-timeout: 600
     networks:
       - name: tenant
