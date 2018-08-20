@@ -33,21 +33,21 @@ labels:
 #    min-ready: 1
 #    providers:
 #      - name: cloud_183
-#  - name: Ubuntu-X
-#    image: ubuntu-xenial
-#    min-ready: 1
-#    providers:
-#      - name: cloud_183
+  - name: Ubuntu-X
+    image: ubuntu-xenial
+    min-ready: 1
+    providers:
+      - name: cloud_183
 #  - name: Ubuntu-B
 #    image: ubuntu-bionic
 #    min-ready: 1
 #    providers:
 #      - name: cloud_183
-  - name: CentOS-7
-    image: centos-7
-    min-ready: 1
-    providers:
-      - name: cloud_183
+#  - name: CentOS-7
+#    image: centos-7
+#    min-ready: 1
+#    providers:
+#      - name: cloud_183
 
 diskimages:
 #    - name: ubuntu-trusty
@@ -73,30 +73,30 @@ diskimages:
 #        DIB_DEBIAN_COMPONENTS: 'main,universe'
 #        GIT_HTTP_LOW_SPEED_TIME: '300'
 #        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
-#    - name: ubuntu-xenial
-#      elements:
-#        - ubuntu-minimal
-#        - vm
-#        - simple-init
-#        - openstack-repos
-#        - nodepool-base
-#        - cache-devstack
-#        - initialize-urandom
-#        - growroot
-#        - infra-package-needs
-#      release: xenial
-#      env-vars:
-#        TMPDIR: /opt/dib_tmp
-#        DIB_CHECKSUM: '1'
-#        DIB_IMAGE_CACHE: /opt/dib_cache
-#        DIB_APT_LOCAL_CACHE: '0'
-#        DIB_DISABLE_APT_CLEANUP: '1'
-#        DIB_GRUB_TIMEOUT: '0'
-#        DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/ubuntu'
-#        DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
-#        DIB_DEBIAN_COMPONENTS: 'main,universe'
-#        GIT_HTTP_LOW_SPEED_TIME: '300'
-#        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+    - name: ubuntu-xenial
+      elements:
+        - ubuntu
+        - vm
+        - simple-init
+        - openstack-repos
+        - nodepool-base
+        - cache-devstack
+        - initialize-urandom
+        - growroot
+        - infra-package-needs
+      release: xenial
+      env-vars:
+        TMPDIR: /opt/dib_tmp
+        DIB_CHECKSUM: '1'
+        DIB_IMAGE_CACHE: /opt/dib_cache
+        DIB_APT_LOCAL_CACHE: '0'
+        DIB_DISABLE_APT_CLEANUP: '1'
+        DIB_GRUB_TIMEOUT: '0'
+        DIB_DISTRIBUTION_MIRROR: 'http://mirror.dfw.rax.openstack.org/ubuntu'
+        DIB_DEBOOTSTRAP_EXTRA_ARGS: '--no-check-gpg'
+        DIB_DEBIAN_COMPONENTS: 'main,universe'
+        GIT_HTTP_LOW_SPEED_TIME: '300'
+        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
 #    - name: ubuntu-bionic
 #      elements:
 #        - ubuntu-minimal
@@ -120,26 +120,26 @@ diskimages:
 #        DIB_DEBIAN_COMPONENTS: 'main,universe'
 #        GIT_HTTP_LOW_SPEED_TIME: '300'
 #        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
-    - name: centos-7
-      elements:
-        - centos
-        - vm
-        - simple-init
-        - openstack-repos
-        - nodepool-base
-        - cache-devstack
-        - growroot
-        - infra-package-needs
-        - epel
-      env-vars:
-        TMPDIR: /opt/dib_tmp
-        DIB_CHECKSUM: '1'
-        DIB_IMAGE_CACHE: /opt/dib_cache
-        QEMU_IMG_OPTIONS: compat=0.10
-        DIB_GRUB_TIMEOUT: '0'
-        DIB_EPEL_DISABLED: '1'
-        GIT_HTTP_LOW_SPEED_TIME: '300'
-        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
+#    - name: centos-7
+#      elements:
+#        - centos
+#        - vm
+#        - simple-init
+#        - openstack-repos
+#        - nodepool-base
+#        - cache-devstack
+#        - growroot
+#        - infra-package-needs
+#        - epel
+#      env-vars:
+#        TMPDIR: /opt/dib_tmp
+#        DIB_CHECKSUM: '1'
+#        DIB_IMAGE_CACHE: /opt/dib_cache
+#        QEMU_IMG_OPTIONS: compat=0.10
+#        DIB_GRUB_TIMEOUT: '0'
+#        DIB_EPEL_DISABLED: '1'
+#        GIT_HTTP_LOW_SPEED_TIME: '300'
+#        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
 
 providers:
   - name: cloud_183
@@ -166,13 +166,13 @@ providers:
 #        user-home: /home/zuul
 #        key-name: nodepool
 #        private-key: '/home/nodepool/.ssh/id_rsa'
-#      - name: ubuntu-xenial
-#        min-ram: 2048
-#        diskimage: ubuntu-xenial
-#        username: zuul
-#        user-home: /home/zuul
-#        key-name: nodepool
-#        private-key: '/home/nodepool/.ssh/id_rsa'
+      - name: ubuntu-xenial
+        min-ram: 2048
+        diskimage: ubuntu-xenial
+        username: zuul
+        user-home: /home/zuul
+        key-name: nodepool
+        private-key: '/home/nodepool/.ssh/id_rsa'
 #      - name: ubuntu-bionic
 #        min-ram: 2048
 #        diskimage: ubuntu-bionic
@@ -180,13 +180,13 @@ providers:
 #        user-home: /home/zuul
 #        key-name: nodepool
 #        private-key: '/home/nodepool/.ssh/id_rsa'
-      - name: centos-7
-        min-ram: 2048
-        diskimage: centos-7
-        username: zuul
-        user-home: /home/zuul
-        key-name: nodepool
-        private-key: '/home/nodepool/.ssh/id_rsa'
+#      - name: centos-7
+#        min-ram: 2048
+#        diskimage: centos-7
+#        username: zuul
+#        user-home: /home/zuul
+#        key-name: nodepool
+#        private-key: '/home/nodepool/.ssh/id_rsa'
 
 targets:
   - name: jenkins1
