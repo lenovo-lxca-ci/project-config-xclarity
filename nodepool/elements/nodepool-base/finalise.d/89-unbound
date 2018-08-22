@@ -117,7 +117,7 @@ sed -i -e 's/^\(DNS[0-9]*=[.0-9]\+\)/#\1/g' /etc/sysconfig/network-scripts/ifcfg
 sed -i -e 's/^NETCONFIG_DNS_POLICY=.*/NETCONFIG_DNS_POLICY=""/g' /etc/sysconfig/network/config
 set -e
 
-echo 'nameserver 127.0.0.1' > /etc/resolv.conf
+echo 'nameserver 8.8.8.8' > /etc/resolv.conf
 
 exit 0
 EOF
@@ -184,7 +184,7 @@ fi
 # Note that with /etc/resolv.conf as a regular file, systemd-resolved
 # will also obey it for nameserver info when it starts at boot.
 rm -f /etc/resolv.conf.ORIG
-echo "nameserver 127.0.0.1" > /etc/resolv.conf.ORIG
+echo "nameserver 8.8.8.8" > /etc/resolv.conf.ORIG
 
 case "$DIB_INIT_SYSTEM" in
     upstart)
