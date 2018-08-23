@@ -51,6 +51,7 @@ labels:
 
 diskimages:
 #    - name: ubuntu-trusty
+#      pause: True
 #      elements:
 #        - ubuntu-minimal
 #        - vm
@@ -74,6 +75,7 @@ diskimages:
 #        GIT_HTTP_LOW_SPEED_TIME: '300'
 #        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
     - name: ubuntu-xenial
+      pause: True
       elements:
         - ubuntu
         - vm
@@ -98,6 +100,7 @@ diskimages:
         GIT_HTTP_LOW_SPEED_TIME: '300'
         GIT_HTTP_LOW_SPEED_LIMIT: '1000'
 #    - name: ubuntu-bionic
+#      pause: True
 #      elements:
 #        - ubuntu-minimal
 #        - vm
@@ -121,6 +124,7 @@ diskimages:
 #        GIT_HTTP_LOW_SPEED_TIME: '300'
 #        GIT_HTTP_LOW_SPEED_LIMIT: '1000'
 #    - name: centos-7
+#      pause: True
 #      elements:
 #        - centos7
 #        - vm
