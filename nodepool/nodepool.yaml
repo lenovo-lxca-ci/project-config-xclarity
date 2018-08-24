@@ -77,7 +77,7 @@ diskimages:
     - name: ubuntu-xenial
       pause: False
       elements:
-        - ubuntu
+        - ubuntu-minimal
         - vm
         - simple-init
         - openstack-repos
