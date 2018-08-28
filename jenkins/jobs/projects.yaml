@@ -1,12 +1,13 @@
 - project:
-    name: sandbox
+    name: ci-sandbox
     github-org: openstack-dev
     node: master
-    vendor: myvendor
+    vendor: lenovo
 
     jobs:
         - noop-check-communication
+            node: 'devstack_slave'
         - dsvm-tempest-full:
             node: 'devstack_slave || devstack-precise-check || d-p-c'
         - dsvm-tempest-my-cinder-driver:
-            node: 'd-p-c'
+            node: 'devstack_slave || d-p-c'
