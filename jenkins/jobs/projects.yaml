@@ -5,7 +5,7 @@
     vendor: lenovo
 
     jobs:
-        - noop-check-communication
+        - noop-check-communication:
             node: 'devstack_slave'
         - dsvm-tempest-full:
             node: 'devstack_slave || devstack-precise-check || d-p-c'
