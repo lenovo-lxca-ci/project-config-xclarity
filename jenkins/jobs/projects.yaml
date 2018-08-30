@@ -1,20 +1,6 @@
-#- project:
-#    name: ci-sandbox
-#    github-org: openstack-dev
-#    node: master
-#    vendor: lenovo
-#
-#    jobs:
-#        - noop-check-communication:
-#            node: 'devstack_slave'
-#        - dsvm-tempest-full:
-#            node: 'devstack_slave || devstack-precise-check || d-p-c'
-#        - dsvm-tempest-my-cinder-driver:
-#            node: 'devstack_slave || devstack-precise-check || d-p-c'
-
 - project:
-    name: ironic
-    github-org: openstack
+    name: ci-sandbox
+    github-org: openstack-dev
     node: master
     vendor: lenovo
 
@@ -23,3 +9,17 @@
             node: 'devstack_slave'
         - dsvm-tempest-full:
             node: 'devstack_slave || devstack-precise-check || d-p-c'
+        - dsvm-tempest-my-cinder-driver:
+            node: 'devstack_slave || devstack-precise-check || d-p-c'
+
+#- project:
+#    name: ironic
+#    github-org: openstack
+#    node: master
+#    vendor: lenovo
+#
+#    jobs:
+#        - noop-check-communication:
+#            node: 'devstack_slave'
+#        - dsvm-tempest-full:
+#            node: 'devstack_slave || devstack-precise-check || d-p-c'
