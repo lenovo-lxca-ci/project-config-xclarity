@@ -71,7 +71,7 @@ projects:
 #      # test a full Tempest run within devstack.
 #      - dsvm-tempest-full
   - name: openstack/ironic
-    check:
-      - noop-check-communication
+    #check:
+    #  - noop-check-communication
     silent:
       - dsvm-tempest-full
