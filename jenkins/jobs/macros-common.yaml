@@ -63,7 +63,8 @@
     name: console-log
     publishers:
       - scp:
-          site: 'lenovo_lxca_ci_log'
+          #site: 'lenovo_lxca_ci_log'
+          site: '10.240.24.140'
           files:
             - target: 'logs/$LOG_PATH'
               copy-console: true
@@ -73,7 +74,8 @@
     name: devstack-logs
     publishers:
       - scp:
-          site: 'lenovo_lxca_ci_log'
+          #site: 'lenovo_lxca_ci_log'
+          site: '10.240.24.140'
           files:
             - target: 'logs/$LOG_PATH'
               source: 'logs/**'
