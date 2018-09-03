@@ -15,17 +15,48 @@
       - shell: |
           #!/bin/bash -xe
           echo "We are inside lxca gate"
+          STACK_PATH=/opt/stack
+
           # install packages
           # sudo pip install python-xclarityclient
 
           # clone projects
-          sudo mkdir -p /opt/stack
-          sudo chown ironic.ironic /opt/stack
-          sudo chmod 0777 /opt/stack
-          cd /opt/stack
-          git clone https://github.com/openstack-dev/devstack.git
-          git clone https://github.com/openstack/ironic.git
-          git clone https://github.com/openstack/ironic-tempest-plugin.git
+          function update_repo {
+              git remote update
+              git reset --hard
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              git checkout master
+              git reset --hard remotes/origin/master
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+          }
+
+          if [[ ! e $STACK_PATH ]]; then
+              sudo mkdir -p /opt/stack
+              sudo chown ironic.ironic /opt/stack
+              sudo chmod 0777 /opt/stack
+              cd /opt/stack
+              git clone https://github.com/openstack-dev/devstack.git
+              git clone https://github.com/openstack/ironic.git
+              git clone https://github.com/openstack/ironic-tempest-plugin.git
+          else
+              cd $STACK_PATH/devstack
+              git remote set-url origin https://github.com/openstack-dev/devstack.git
+              update_repo
+              ./unstack.sh
+              cd $STACK_PATH/ironic
+              git remote set-url origin https://github.com/openstack/ironic.git
+              update_repo
+              cd $STACK_PATH/ironic-tempest-plugin
+              git remote set-url origin https://github.com/openstack/ironic-tempest-plugin.git
+              update_repo
+
+          fi
 
           # update ironic
           #cd /opt/stack/ironic
@@ -34,8 +65,10 @@
           #git fetch https://git.openstack.org/openstack/ironic refs/changes/1/123456/7 && git cherry-pick FETCH_HEAD
 
           # run stack
-          cd /opt/stack/devstack/
-          cp /tmp/local.conf.sample local.conf
+          cd /tmp
+          git clone https://github.com/lenovo-lxca-ci/LENOVO-CI-JOBS.git
+          cd $STACK_PATH/devstack/
+          cp /tmp/LENOVO-CI-JOBS/xclarity/local.conf.sample local.conf
           ./stack.sh
 
     publishers:
