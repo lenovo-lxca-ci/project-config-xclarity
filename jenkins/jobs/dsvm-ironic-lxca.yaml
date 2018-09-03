@@ -13,9 +13,25 @@
       - net-info
       - devstack-checkout
       - shell: |
+          # clone devstack-gate for ironic-lxca
+          if [[ -e LENOVO-CI-JOBS ]]; then
+              rm -rf ./LENOVO-CI-JOBS
+          fi
           git clone https://github.com/lenovo-lxca-ci/LENOVO-CI-JOBS.git
           chmod +x ./LENOVO-CI-JOBS/xclarity/gate.sh
+
+          # Configure molteniron
+
+
+          # Generate MoltenIron Id for node
+
+          # Allocate test node
           ./LENOVO-CI-JOBS/xclarity/gate.sh
+
+          # Run ironic-lxca gate
+
+          # Release test node
+          
 
     publishers:
       - devstack-logs
