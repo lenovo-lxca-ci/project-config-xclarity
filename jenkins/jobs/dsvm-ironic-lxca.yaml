@@ -50,6 +50,7 @@
               update_repo
               # uninstall devstack
               ./unstack.sh
+              ./clean.sh
 
               cd $STACK_PATH/ironic
               git remote set-url origin https://github.com/openstack/ironic.git
