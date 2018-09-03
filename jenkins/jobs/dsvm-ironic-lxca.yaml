@@ -21,7 +21,18 @@
           # sudo pip install python-xclarityclient
 
           # clone projects
-          function update_repo {{
+          if [[ ! e $STACK_PATH ]]; then
+              sudo mkdir -p /opt/stack
+              sudo chown ironic.ironic /opt/stack
+              sudo chmod 0777 /opt/stack
+              cd /opt/stack
+              git clone https://github.com/openstack-dev/devstack.git
+              git clone https://github.com/openstack/ironic.git
+              git clone https://github.com/openstack/ironic-tempest-plugin.git
+          else
+              cd $STACK_PATH/devstack
+              git remote set-url origin https://github.com/openstack-dev/devstack.git
+              #update_repo
               git remote update
               git reset --hard
               if ! git clean -x -f ; then
@@ -34,28 +45,40 @@
                   sleep 1
                   git clean -x -f
               fi
-          }}
-
-          if [[ ! e $STACK_PATH ]]; then
-              sudo mkdir -p /opt/stack
-              sudo chown ironic.ironic /opt/stack
-              sudo chmod 0777 /opt/stack
-              cd /opt/stack
-              git clone https://github.com/openstack-dev/devstack.git
-              git clone https://github.com/openstack/ironic.git
-              git clone https://github.com/openstack/ironic-tempest-plugin.git
-          else
-              cd $STACK_PATH/devstack
-              git remote set-url origin https://github.com/openstack-dev/devstack.git
-              update_repo
+              # uninstall devstack
               ./unstack.sh
+
               cd $STACK_PATH/ironic
               git remote set-url origin https://github.com/openstack/ironic.git
-              update_repo
+              #update_repo
+              git remote update
+              git reset --hard
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              git checkout master
+              git reset --hard remotes/origin/master
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+
               cd $STACK_PATH/ironic-tempest-plugin
               git remote set-url origin https://github.com/openstack/ironic-tempest-plugin.git
-              update_repo
-
+              #update_repo
+              git remote update
+              git reset --hard
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
+              git checkout master
+              git reset --hard remotes/origin/master
+              if ! git clean -x -f ; then
+                  sleep 1
+                  git clean -x -f
+              fi
           fi
 
           # update ironic
