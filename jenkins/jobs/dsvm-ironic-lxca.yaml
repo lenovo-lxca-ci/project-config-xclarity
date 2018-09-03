@@ -21,7 +21,7 @@
           # sudo pip install python-xclarityclient
 
           # clone projects
-          function update_repo {
+          function update_repo {{
               git remote update
               git reset --hard
               if ! git clean -x -f ; then
@@ -34,7 +34,7 @@
                   sleep 1
                   git clean -x -f
               fi
-          }
+          }}
 
           if [[ ! e $STACK_PATH ]]; then
               sudo mkdir -p /opt/stack
