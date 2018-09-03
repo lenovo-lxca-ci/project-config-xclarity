@@ -22,7 +22,7 @@
 
           # clone projects
           function update_repo {{
-              git remote update
+              sudo git remote update
               git reset --hard
               if ! git clean -x -f ; then
                   sleep 1
