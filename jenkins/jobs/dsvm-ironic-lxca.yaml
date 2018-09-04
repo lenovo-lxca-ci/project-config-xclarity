@@ -27,9 +27,9 @@
           # Generate MoltenIron Id for node
 
           # Allocate test node
-          ./LENOVO-CI-JOBS/xclarity/gate.sh
 
           # Run ironic-lxca gate
+          bash /home/ironic/workspace/lenovo-tempest-dsvm-ironic-lxca/LENOVO-CI-JOBS/xclarity/gate.sh
 
           # Release test node
           

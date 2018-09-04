@@ -76,7 +76,7 @@
           site: 'LogServer'
           files:
             - target: 'logs/$LOG_PATH'
-              source: 'logs/*'
+              source: '**/logs/*'
               keep-hierarchy: true
               copy-after-failure: true
 
