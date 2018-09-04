@@ -65,7 +65,8 @@
       - scp:
           site: 'LogServer'
           files:
-            - target: 'logs/$LOG_PATH'
+            #- target: 'logs/$LOG_PATH'
+            - target: 'logs/$JOB_NAME/$BUILD_ID'
               copy-console: true
               copy-after-failure: true
 
