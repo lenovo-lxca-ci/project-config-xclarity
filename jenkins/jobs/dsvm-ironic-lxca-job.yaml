@@ -35,7 +35,7 @@
 
           export RE_EXEC=true
 
-          export MASTER=$(echo $JENKINS_URL|cut -f3 -d/|cut -f1 -d:)
+          export MASTER=10.240.24.139
           export ZUUL_URL=git@${MASTER}:/var/lib/zuul/git
           #ssh -o "StrictHostKeyChecking no" git@${MASTER} date
 
