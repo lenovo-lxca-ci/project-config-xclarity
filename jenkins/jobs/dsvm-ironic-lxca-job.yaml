@@ -45,8 +45,6 @@
               set +e
               mkdir logs &>/dev/null
               #kill stack process
-              ps --no-header -fustack|awk '{print $2}'|\
-                  xargs -i sudo -ustack kill {}
               sleep 5
               [[ -f /opt/stack/new/devstack/unstack.sh ]] && \
                   sudo -ustack /opt/stack/new/devstack/unstack.sh --all &> logs/clean.log
