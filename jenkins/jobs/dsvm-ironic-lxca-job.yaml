@@ -29,7 +29,7 @@
           fi
 
           export PYTHONUNBUFFERED=true
-          export BUILD_TIMEOUT=$(expr ${HOUR:-4} \* 60 \* 60)
+          export BUILD_TIMEOUT=$(expr 4 \* 60 \* 60)
           export DEVSTACK_GATE_TEMPEST=1
           export DEVSTACK_GATE_TEMPEST_REGEX="volume"
 
