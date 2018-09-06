@@ -35,9 +35,6 @@
 
           export RE_EXEC=true
 
-          #export MASTER=10.240.24.139
-          #export ZUUL_URL=git@${MASTER}:/var/lib/zuul/git
-          #ssh -o "StrictHostKeyChecking no" git@${MASTER} date
 
           #export LOCAL_CONF=/tmp/local.conf.sample
           #export DEVSTACK_LOCAL_CONFIG=$(cat $LOCAL_CONF)
