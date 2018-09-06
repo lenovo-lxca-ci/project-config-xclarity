@@ -1,0 +1,87 @@
+- job-template:
+    name: 'dsvm-tempest-ironic-lxca-job'
+    node: '{node}'
+
+    wrappers:
+      - timeout:
+          timeout: 125
+          fail: true
+      - timestamps
+
+    builders:
+      - link-logs
+      - net-info
+      - devstack-checkout
+      - shell: |
+          #!/bin/bash -xe
+          
+          rm -rf devstack-gate && git clone http://git.openstack.org/openstack-infra/devstack-gate
+          
+          export TEMPEST_CONCURRENCY=1
+          
+          export GIT_BASE=http://git.openstack.org
+          export ZUUL_PROJECT=${ZUUL_PROJECT:='openstack/ci-sandbox'}
+          export ZUUL_BRANCH=${ZUUL_BRANCH:='master'}
+          
+          export PYTHONUNBUFFERED=true
+          export BUILD_TIMEOUT=$(expr ${HOUR:-4} \* 60 \* 60)
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_REGEX="volume"
+          export RE_EXEC=true
+          MASTER=$(echo $JENKINS_URL|cut -f3 -d/|cut -f1 -d:)
+          export ZUUL_URL=git@${MASTER}:/var/lib/zuul/git
+          ssh -o "StrictHostKeyChecking no" git@${MASTER} date
+          export LOCAL_CONF=/tmp/local.conf.sample
+          export DEVSTACK_LOCAL_CONFIG=$(cat $LOCAL_CONF)
+          #export DEVSTACK_LOCALCONF=/tmp/local.conf.sample
+          
+          
+          function remove_pre_devstack {{
+              set +e
+          	mkdir logs &>/dev/null
+          	#kill stack process
+              ps --no-header -fustack|awk '{print $2}'|\
+                  xargs -i sudo -ustack kill {}
+              sleep 5
+              [[ -f /opt/stack/new/devstack/unstack.sh ]] && \
+                  sudo -ustack /opt/stack/new/devstack/unstack.sh --all &> logs/clean.log
+          	[[ -f /opt/stack/new/devstack/clean.sh ]] && \
+                  sudo -ustack /opt/stack/new/devstack/clean.sh &>> logs/clean.log
+              sudo rm -rf /opt/stack/new &>> logs/clean.log
+              
+              #stop services
+              sudo service apache2 stop
+              sudo service mysql stop
+              sudo service libvirt-bin stop
+              #clean up logs
+              sudo journalctl --vacuum-time=1sec
+              sudo logrotate -f /etc/logrotate.conf
+              sudo find /var/log -name '*.gz' -o -name '*.?' -exec rm {} \;
+              #need to start libvirt-bin
+              sudo service libvirt-bin start
+              set -e
+          }}
+          export -f remove_pre_devstack
+          
+          function pre_test_hook {{
+            echo "${FUNCNAME[0]}"
+          
+          }}
+          export -f pre_test_hook
+          # hook end
+          
+          # add post_test_hook
+          function post_test_hook {{
+              # place code here if you need to do something after test succeed
+          	echo "${FUNCNAME[0]}"
+          	
+          }}
+          export -f post_test_hook 
+          
+          remove_pre_devstack
+          cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
+          ./safe-devstack-vm-gate-wrap.sh
+
+    publishers:
+      - devstack-logs
+      - console-log
