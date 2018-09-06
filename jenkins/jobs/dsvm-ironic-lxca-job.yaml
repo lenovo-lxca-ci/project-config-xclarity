@@ -67,7 +67,7 @@
           export -f remove_pre_devstack
           
           function pre_test_hook {{
-              echo "${FUNCNAME[0]}"
+              echo "We are inside lxca pre_test_hook"
           }}
           export -f pre_test_hook
           # hook end
@@ -75,7 +75,7 @@
           # add post_test_hook
           function post_test_hook {{
               # place code here if you need to do something after test succeed
-              echo "${FUNCNAME[0]}"
+              echo "We are inside lxca post_test_hook"
           }}
           export -f post_test_hook 
           
