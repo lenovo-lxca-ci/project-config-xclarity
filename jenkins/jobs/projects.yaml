@@ -11,9 +11,9 @@
             node: 'devstack_slave || devstack-precise-check || d-p-c'
         - dsvm-tempest-my-cinder-driver:
             node: 'devstack_slave || devstack-precise-check || d-p-c'
-        - lenovo-tempest-dsvm-ironic-lxca:
+        - tempest-dsvm-ironic-lxca:
             node: 'devstack_slave || devstack-precise-check || d-p-c'
-        - dsvm-tempest-ironic-lxca-job:
+        - lenovo-dsvm-ironic-lxca:
             node: 'devstack_slave || devstack-precise-check || d-p-c'
 
 #- project:

@@ -1,5 +1,5 @@
 - job-template:
-    name: 'dsvm-tempest-ironic-lxca-job'
+    name: 'tempest-dsvm-ironic-lxca'
     node: '{node}'
 
     wrappers:
