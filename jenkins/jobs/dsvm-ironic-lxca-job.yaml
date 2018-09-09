@@ -20,16 +20,16 @@
               #TODO: update your client here if needed, otherwise delete
               #sudo -H pip install mydriverclient
               echo "Configure the local.conf file to properly setup hp lefthand driver in cinder.conf"
-#              cat <<EOF >$BASE/new/devstack/local.conf
-#          [[local|localrc]]
-#          # Credentials
-#          ADMIN_PASSWORD=password
-#          DATABASE_PASSWORD=password
-#          RABBIT_PASSWORD=password
-#          SERVICE_PASSWORD=password
-#          SERVICE_TOKEN=password
-#          SWIFT_HASH=password
-#          SWIFT_TEMPURL_KEY=password
+              cat <<EOF >$BASE/new/devstack/local.conf
+          [[local|localrc]]
+          # Credentials
+          ADMIN_PASSWORD=password
+          DATABASE_PASSWORD=password
+          RABBIT_PASSWORD=password
+          SERVICE_PASSWORD=password
+          SERVICE_TOKEN=password
+          SWIFT_HASH=password
+          SWIFT_TEMPURL_KEY=password
 #          
 #          # A clean install every time
 #          RECLONE=yes
