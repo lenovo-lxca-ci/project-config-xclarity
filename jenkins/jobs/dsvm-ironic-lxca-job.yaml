@@ -38,33 +38,33 @@
 
           #export LOCAL_CONF=/tmp/local.conf.sample
           #export DEVSTACK_LOCAL_CONFIG=$(cat $LOCAL_CONF)
-          #export DEVSTACK_LOCALCONF=/tmp/local.conf.sample
+          ##export DEVSTACK_LOCALCONF=/tmp/local.conf.sample
           
           
-          function remove_pre_devstack {{
-              set +e
-              mkdir logs &>/dev/null
-              #kill stack process
-              sleep 5
-              [[ -f /opt/stack/new/devstack/unstack.sh ]] && \
-                  sudo -ustack /opt/stack/new/devstack/unstack.sh --all &> logs/clean.log
-              [[ -f /opt/stack/new/devstack/clean.sh ]] && \
-                  sudo -ustack /opt/stack/new/devstack/clean.sh &>> logs/clean.log
-              sudo rm -rf /opt/stack/new &>> logs/clean.log
-
-              #stop services
-              sudo service apache2 stop
-              sudo service mysql stop
-              sudo service libvirt-bin stop
-              #clean up logs
-              sudo journalctl --vacuum-time=1sec
-              sudo logrotate -f /etc/logrotate.conf
-              sudo find /var/log -name '*.gz' -o -name '*.?' -exec rm {} \;
-              #need to start libvirt-bin
-              sudo service libvirt-bin start
-              set -e
-          }}
-          export -f remove_pre_devstack
+#          function remove_pre_devstack {{
+#              set +e
+#              mkdir logs &>/dev/null
+#              #kill stack process
+#              sleep 5
+#              [[ -f /opt/stack/new/devstack/unstack.sh ]] && \
+#                  sudo -ustack /opt/stack/new/devstack/unstack.sh --all &> logs/clean.log
+#              [[ -f /opt/stack/new/devstack/clean.sh ]] && \
+#                  sudo -ustack /opt/stack/new/devstack/clean.sh &>> logs/clean.log
+#              sudo rm -rf /opt/stack/new &>> logs/clean.log
+#
+#              #stop services
+#              sudo service apache2 stop
+#              sudo service mysql stop
+#              sudo service libvirt-bin stop
+#              #clean up logs
+#              sudo journalctl --vacuum-time=1sec
+#              sudo logrotate -f /etc/logrotate.conf
+#              sudo find /var/log -name '*.gz' -o -name '*.?' -exec rm {} \;
+#              #need to start libvirt-bin
+#              sudo service libvirt-bin start
+#              set -e
+#          }}
+#          export -f remove_pre_devstack
           
           function pre_test_hook {{
               echo "We are inside lxca pre_test_hook"
@@ -79,7 +79,7 @@
           }}
           export -f post_test_hook 
           
-          remove_pre_devstack
+#          remove_pre_devstack
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
