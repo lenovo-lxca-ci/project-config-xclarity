@@ -47,7 +47,6 @@
           }}
           export -f post_test_hook 
           
-#          remove_pre_devstack
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
