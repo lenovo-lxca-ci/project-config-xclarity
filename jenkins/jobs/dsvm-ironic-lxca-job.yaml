@@ -14,11 +14,119 @@
       - devstack-checkout
       - shell: |
           #!/bin/bash -xe
-          rm -rf devstack-gate && git clone http://git.openstack.org/openstack-infra/devstack-gate
+
+          function pre_test_hook {{
+              echo "Install thirdparty client libraries"
+              #TODO: update your client here if needed, otherwise delete
+              #sudo -H pip install mydriverclient
+              echo "Configure the local.conf file to properly setup hp lefthand driver in cinder.conf"
+              cat <<EOF >$BASE/new/devstack/local.conf
+          [[local|localrc]]
+          # Credentials
+          ADMIN_PASSWORD=password
+          DATABASE_PASSWORD=password
+          RABBIT_PASSWORD=password
+          SERVICE_PASSWORD=password
+          SERVICE_TOKEN=password
+          SWIFT_HASH=password
+          SWIFT_TEMPURL_KEY=password
           
-          export TEMPEST_CONCURRENCY=1
+          # A clean install every time
+          RECLONE=yes
           
-          export GIT_BASE=http://git.openstack.org
+          # Enable Ironic plugin
+          IRONIC_USING_PLUGIN=true
+          enable_plugin ironic git://git.openstack.org/openstack/ironic
+          
+          # Enable Tempest
+          enable_service tempest
+          
+          # Disable nova novnc service, ironic does not support it anyway.
+          disable_service n-novnc
+          
+          # Enable Swift for the direct deploy interface.
+          enable_service s-proxy
+          enable_service s-object
+          enable_service s-container
+          enable_service s-account
+          
+          # Disable Horizon
+          disable_service horizon
+          
+          # Disable Cinder
+          disable_service cinder c-sch c-api c-vol
+          
+          # Swift temp URL's are required for the direct deploy interface
+          SWIFT_ENABLE_TEMPURLS=True
+          
+          # Tempest related options
+          BUILD_TIMEOUT=3000
+          IRONIC_CALLBACK_TIMEOUT=3000
+          POWER_TIMEOUT=600
+          SERVICE_TIMEOUT=600
+          TEMPEST_PLUGINS+=' /opt/stack/ironic-tempest-plugin'
+          
+          # Create 1 virtual machines to pose as Ironic's baremetal nodes.
+          IRONIC_VM_COUNT=3
+          IRONIC_BAREMETAL_BASIC_OPS=True
+          DEFAULT_INSTANCE_TYPE=baremetal
+          
+          # Enable additional hardware types, if needed.
+          IRONIC_ENABLED_HARDWARE_TYPES=ipmi,fake-hardware,xclarity
+          # Don't forget that many hardware types require enabling of additional
+          # interfaces, most often power and management:
+          IRONIC_ENABLED_MANAGEMENT_INTERFACES=ipmitool,fake,xclarity
+          IRONIC_ENABLED_POWER_INTERFACES=ipmitool,fake,xclarity
+          # The 'ipmi' hardware type's default deploy interface is 'iscsi'.
+          # This would change the default to 'direct':
+          #IRONIC_DEFAULT_DEPLOY_INTERFACE=direct
+          
+          # Change this to alter the default driver for nodes created by devstack.
+          # This driver should be in the enabled list above.
+          IRONIC_DEPLOY_DRIVER=ipmi
+          
+          # The parameters below represent the minimum possible values to create
+          # functional nodes.
+          IRONIC_VM_SPECS_RAM=1280
+          IRONIC_VM_SPECS_DISK=10
+          
+          # Size of the ephemeral partition in GB. Use 0 for no ephemeral partition.
+          IRONIC_VM_EPHEMERAL_DISK=0
+          
+          # To build your own IPA ramdisk from source, set this to True
+          IRONIC_BUILD_DEPLOY_RAMDISK=False
+          
+          VIRT_DRIVER=ironic
+          
+          # By default, DevStack creates a 10.0.0.0/24 network for instances.
+          # If this overlaps with the hosts network, you may adjust with the
+          # following.
+          NETWORK_GATEWAY=10.1.0.1
+          FIXED_RANGE=10.1.0.0/24
+          FIXED_NETWORK_SIZE=256
+          
+          # Log all output to files
+          LOGFILE=/opt/stack/devstack.log
+          LOGDIR=/opt/stack/logs
+          IRONIC_VM_LOG_DIR=/opt/stack/ironic-bm-logs
+
+          EOF
+
+          }}
+
+          export -f pre_test_hook
+
+          # To keep our CINDER_ENABLED_BACKENDS configuration in localrc
+          export KEEP_LOCALRC=true
+
+          export PYTHONUNBUFFERED=true
+          export DEVSTACK_GATE_TIMEOUT=120
+          export DEVSTACK_GATE_TEMPEST=1
+          export DEVSTACK_GATE_TEMPEST_REGEX="volume"
+
+          # Let's use the http protocol instead of git protocol
+          export GIT_BASE=https://git.openstack.org
+
           if [ -z $ZUUL_PROJECT ]; then
               export ZUUL_PROJECT=openstack-dev/ci-sandbox
               #export ZUUL_PROJECT=openstack/ironic
@@ -27,26 +135,6 @@
               export ZUUL_BRANCH=master
           fi
 
-          export PYTHONUNBUFFERED=true
-          export BUILD_TIMEOUT=$(expr 4 \* 60 \* 60)
-          export DEVSTACK_GATE_TEMPEST=1
-          export DEVSTACK_GATE_TEMPEST_REGEX="volume"
-
-          export RE_EXEC=true
-          
-          function pre_test_hook {{
-              echo "We are inside lxca pre_test_hook"
-          }}
-          export -f pre_test_hook
-          # hook end
-          
-          # add post_test_hook
-          function post_test_hook {{
-              # place code here if you need to do something after test succeed
-              echo "We are inside lxca post_test_hook"
-          }}
-          export -f post_test_hook 
-          
           cp devstack-gate/devstack-vm-gate-wrap.sh ./safe-devstack-vm-gate-wrap.sh
           ./safe-devstack-vm-gate-wrap.sh
 
