@@ -15,12 +15,12 @@
       - shell: |
           #!/bin/bash -xe
 
-          function pre_test_hook {{
+          function pre_test_hook {
               echo "Install thirdparty client libraries"
               #TODO: update your client here if needed, otherwise delete
               #sudo -H pip install mydriverclient
               echo "Configure the local.conf file to properly setup hp lefthand driver in cinder.conf"
-          }}
+          }
 #              cat <<EOF >$BASE/new/devstack/local.conf
 #          [[local|localrc]]
 #          # Credentials
